@@ -25,7 +25,7 @@ In the project directory run:
 
 ```
 GRUVEO_API_CLIENT_ID=<your_api_client_id> \
-GRUVEO_API_SECRET=<your_api_client_secreti> \
+GRUVEO_API_SECRET=<your_api_secret> \
 npm run start-example-4
 ```
 
