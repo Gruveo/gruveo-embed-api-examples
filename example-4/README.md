@@ -24,8 +24,8 @@ npm install
 In the project directory run:
 
 ```
-GRUVEO_API_CLIENT_ID=<i>your_api_client_id</i> \
-GRUVEO_API_SECRET=<i>your_api_client_secret</i> \
+GRUVEO_API_CLIENT_ID=<your_api_client_id> \
+GRUVEO_API_SECRET=<your_api_client_secreti> \
 npm run start-example-4
 ```
 
