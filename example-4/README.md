@@ -31,6 +31,6 @@ npm run start-example-4
 
 You can also provide optional `PORT` environment variable if default value (8443) is not suitable.
 
-Afterwards you can open https://localhost:8443 in your browser.
+Afterwards you can open [https://localhost:8443](https://localhost:8443) in your browser.
 
 **Important:** Because the embedded version of Gruveo requires https, we have provided a self-signed certificate which you have to accept in the browser in order to see the example.
