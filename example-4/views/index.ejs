@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Using the JavaScript API Methods and Events</title>
+    <script>
+      var securityParams = {
+        clientid: <%- clientid %>,
+        generated: <%- generated %>,
+        signature: <%- signature %>
+      };
+    </script>
+  </head>
+  <body>
+    <p>
+      <button id="call-btn">Call</button>
+      <button id="end-btn">End</button>
+    </p>
+
+    <div id="myembed"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "semi": [ 1, "always" ],
+    "no-unused-vars": [ 1, { "vars": "all", "args": "none" } ]
+  }
+}
