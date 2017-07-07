@@ -6,5 +6,9 @@
   "rules": {
     "semi": [ 1, "always" ],
     "no-unused-vars": [ 1, { "vars": "all", "args": "none" } ]
+  },
+  "globals": {
+    "Gruveo": true,
+    "securityParams": true
   }
 }
