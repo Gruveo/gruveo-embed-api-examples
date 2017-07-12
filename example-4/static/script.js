@@ -49,9 +49,9 @@ function handleEmbedReady(e) {
   });
   document.getElementById('roomLock-chk').addEventListener('change', (e) => {
     log('Toggling room lock.');
-    embed.toggleVideo(e.target.checked);
+    embed.toggleRoomLock(e.target.checked);
   });
-  document.getElementById('switchCamera-btn').addEventListener('click', (e) => {
+  document.getElementById('switchCamera-btn').addEventListener('click', () => {
     log('Switching camera.');
     embed.switchCamera();
   });
