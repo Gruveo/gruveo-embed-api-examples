@@ -2,6 +2,7 @@ const express = require('express');
 const crypto = require('crypto');
 const https = require('https');
 const fs = require('fs');
+const base64 = require('base64-stream');
 
 const clientId = process.env.GRUVEO_API_CLIENT_ID;
 const secret = process.env.GRUVEO_API_SECRET;
@@ -15,7 +16,7 @@ const basedir = `${__dirname}/..`;
 
 const app = express();
 app.set('view engine', 'ejs');
-app.set('views', `${basedir}//views`);
+app.set('views', `${basedir}/views`);
 
 app.get('/', function(req, res) {
   const generated = Math.floor(Date.now() / 1000);
@@ -23,11 +24,17 @@ app.get('/', function(req, res) {
   hmac.update(generated.toString());
 
   res.render('index', {
-    clientid: JSON.stringify(clientId),
-    secret: JSON.stringify(secret),
+    clientId: JSON.stringify(clientId),
     generated: JSON.stringify(generated),
-    signature: JSON.stringify(hmac.digest('base64'))      
+    signature: JSON.stringify(hmac.digest('base64'))
   });
+});
+
+app.post('/signer', function (req, res) {
+  req
+    .pipe(crypto.createHmac('sha256', secret))
+    .pipe(base64.encode())
+    .pipe(res.set('Content-Type', 'text/plain'));
 });
 
 app.use(express.static(`${basedir}/static`));
