@@ -29,33 +29,49 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input id="code-input" type="text" class="form-control" size="20" placeholder="Code. Empty for random.">
-            </div>
-            <button id="call-btn" type="button" class="btn btn-default">Call</button>
-            <button id="end-btn" type="button" class="btn btn-default">End</button>
-          </form>
         </div>
       </div>
     </nav>
 
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <h2>About</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis metus at massa accumsan, in tempus risus ultrices. Curabitur ante nunc, auctor eget hendrerit id, lobortis in justo. Quisque eu lorem sapien. Quisque ornare dolor quis nisi luctus vestibulum. Fusce lobortis ac enim vel pretium. Suspendisse dapibus sagittis lorem ut euismod. Curabitur semper interdum ipsum. Fusce id convallis ante, non euismod elit. Integer ac posuere velit, a dignissim turpis. Proin eu turpis nisl. Cras ut euismod nisl, eu pharetra justo. Phasellus nisi tortor, ullamcorper sit amet sapien quis, luctus scelerisque dolor. Sed blandit condimentum velit, non cursus enim fringilla nec. Nulla vel arcu in felis tincidunt scelerisque. Nunc semper orci ac magna sodales sodales. Maecenas facilisis venenatis elit, ut facilisis est pretium eu.</p>
+        </div>
+        <div class="col-md-6">
+          <h2>Logs</h2>
+          <textarea id="logs" class="form-control" style="width: 100%; white-space: pre; font-family: monospace;" rows="10" readonly></textarea>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
+          <h2>Controls</h2>
+          <form>
+            <form class="navbar-form navbar-left">
+              <div class="form-group">
+                <label class="control-label" for="code-input">Handle or room</label>
+                <input id="code-input" type="text" class="form-control" size="20" placeholder="Empty for random.">
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input id="audio-chk" type="checkbox" class="btn btn-default" /> Audio
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input id="video-chk" type="checkbox" class="btn btn-default" /> Video
+                </label>
+              </div>
+              <button id="call-btn" type="button" class="btn btn-default">Call</button>
+              <button id="end-btn" type="button" class="btn btn-default">End call</button>
+            </form>
+          </form>
+        </div>
+        <div class="col-md-6">
           <h2>Embed Gruveo</h2>
           <div id="myembed"></div>
           <script src="script.js"></script>
-        </div>
-        <div class="col-md-6">
-          <h2>Logs</h2>
-          <textarea id="logs" class="form-control" style="width: 100%; white-space: pre; font-family: monospace;" rows="20" readonly></textarea>
         </div>
       </div>
 

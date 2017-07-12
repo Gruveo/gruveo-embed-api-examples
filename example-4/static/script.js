@@ -31,7 +31,18 @@ function handleEmbedReady(e) {
     log(`Calling code "${code}".`);
     embed.call(code, true);
   });
-  document.getElementById('end-btn').addEventListener('click', () => embed.end());
+  document.getElementById('end-btn').addEventListener('click', () => {
+    log('Ending call.');
+    embed.end();
+  });
+  document.getElementById('audio-chk').addEventListener('change', (e) => {
+    log('Toggling audio.');
+    embed.toggleAudio(e.target.checked);
+  });
+  document.getElementById('video-chk').addEventListener('change', (e) => {
+    log('Toggling video.');
+    embed.toggleVideo(e.target.checked);
+  });
 }
 
 let endTimeout;
