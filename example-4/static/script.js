@@ -43,6 +43,14 @@ function handleEmbedReady(e) {
     log('Toggling video.');
     embed.toggleVideo(e.target.checked);
   });
+  document.getElementById('roomLock-chk').addEventListener('change', (e) => {
+    log('Toggling room lock.');
+    embed.toggleVideo(e.target.checked);
+  });
+  document.getElementById('switchCamera-btn').addEventListener('click', (e) => {
+    log('Switching camera.');
+    embed.switchCamera();
+  });
 }
 
 let endTimeout;
