@@ -20,7 +20,11 @@ function onGruveoEmbedAPIReady() {
   embed
     .on('ready', handleEmbedReady)
     .on('stateChange', handleEmbedStateChange)
-    .on('requestToSignApiAuthToken', handleEmbedRequestToSignApiAuthToken);
+    .on('requestToSignApiAuthToken', handleEmbedRequestToSignApiAuthToken)
+    .on('hangup', () => log('Received "hang-up".'))
+    .on('busy', () => log('Received "busy".'))
+    .on('error', (error) => log(`Received error "${error}".`))
+    ;
 }
 
 function handleEmbedReady(e) {
