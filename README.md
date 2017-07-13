@@ -2,7 +2,7 @@
 
 Examples:
 
-* [Example 4](example-4/README.md): Using the JavaScript API Methods and Events
+* [Basic Demo](example-4/README.md)
 
 Documentation:
 
