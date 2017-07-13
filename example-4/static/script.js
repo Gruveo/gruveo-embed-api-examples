@@ -58,14 +58,7 @@ function handleEmbedReady(e) {
 let endTimeout;
 function handleEmbedStateChange(e) {
   log(`State set to "${e.state}".`);
-  if (e.state === 'call') {
-    // Set the call to end after 10 seconds.
-    endTimeout = setTimeout(() => {
-      log(`Ending call (timeout).`);
-      embed.end();
-    }, 10000);
-  } else if (e.state === 'ready') {
-    clearTimeout(endTimeout);
+  if (e.state === 'ready') {
     log(`Call duration was ${e.callDuration} s.`);
   }
 }
