@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const tag = document.createElement('script');
 tag.src = 'https://local.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -19,52 +21,52 @@ function onGruveoEmbedAPIReady() {
     .on('ready', handleEmbedReady)
     .on('stateChange', handleEmbedStateChange)
     .on('requestToSignApiAuthToken', handleEmbedRequestToSignApiAuthToken)
-    .on('hangup', () => log('Received "hangup".'))
-    .on('busy', () => log('Received "busy".'))
-    .on('error', (error) => log(`Received error "${error}".`))
+    .on('hangup', () => console.info('Received "hangup".'))
+    .on('busy', () => console.info('Received "busy".'))
+    .on('error', (error) => console.error(`Received error "${error}".`))
     ;
 }
 
 function handleEmbedReady(e) {
-  log('Ready.');
+  console.info('Ready.');
   document.getElementById('call-btn').addEventListener('click', () => {
     // Generate a random code and start a video call on that code.
     const code = document.getElementById('code-input').value || Gruveo.Embed.generateRandomCode();
-    log(`Calling code "${code}".`);
+    console.info(`Calling code "${code}".`);
     embed.call(code, true);
   });
   document.getElementById('end-btn').addEventListener('click', () => {
-    log('Ending call.');
+    console.info('Ending call.');
     embed.end();
   });
   document.getElementById('audio-chk').addEventListener('change', (e) => {
-    log('Toggling audio.');
+    console.info('Toggling audio.');
     embed.toggleAudio(e.target.checked);
   });
   document.getElementById('video-chk').addEventListener('change', (e) => {
-    log('Toggling video.');
+    console.info('Toggling video.');
     embed.toggleVideo(e.target.checked);
   });
   document.getElementById('roomLock-chk').addEventListener('change', (e) => {
-    log('Toggling room lock.');
+    console.info('Toggling room lock.');
     embed.toggleRoomLock(e.target.checked);
   });
   document.getElementById('switchCamera-btn').addEventListener('click', () => {
-    log('Switching camera.');
+    console.info('Switching camera.');
     embed.switchCamera();
   });
 }
 
 let endTimeout;
 function handleEmbedStateChange(e) {
-  log(`State set to "${e.state}".`);
+  console.info(`State set to "${e.state}".`);
   if (e.state === 'ready') {
-    log(`Call duration was ${e.callDuration} s.`);
+    console.info(`Call duration was ${e.callDuration} s.`);
   }
 }
 
 function handleEmbedRequestToSignApiAuthToken(token) {
-  log(`Signing API Auth token "${token}".`);
+  console.info(`Signing API Auth token "${token}".`);
   fetch('/signer', {
     method: 'POST',
     body: token
@@ -77,16 +79,12 @@ function handleEmbedRequestToSignApiAuthToken(token) {
     })
     .then(res => res.text())
     .then((signature) => {
-      log(`API Auth token signature is "${signature}".`);
+      console.info(`API Auth token signature is "${signature}".`);
       embed.authorize(securityParams.clientId, signature);
     })
     .catch(err => {
-      log(`Error signing API Auth token: ${err.message}`);
-      log('Ending call.');
+      console.error(`Error signing API Auth token: ${err.message}`);
+      console.info('Ending call.');
       embed.end();
     });
-}
-
-function log(msg) {
-  console.log(msg);
 }
