@@ -7,8 +7,6 @@ let embed;
 // eslint-disable-next-line no-unused-vars
 function onGruveoEmbedAPIReady() {
   embed = new Gruveo.Embed('myembed', {
-    width: 680,
-    height: 465,
     responsive: true,
     embedParams: Object.assign({
       color: '63b2de',
