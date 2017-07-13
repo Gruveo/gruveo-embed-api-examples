@@ -29,11 +29,12 @@ function onGruveoEmbedAPIReady() {
 
 function handleEmbedReady(e) {
   console.info('Ready.');
-  document.getElementById('call-btn').addEventListener('click', () => {
+  document.getElementById('form').addEventListener('submit', (e) => {
     // Generate a random code and start a video call on that code.
     const code = document.getElementById('code-input').value || Gruveo.Embed.generateRandomCode();
     console.info(`Calling code "${code}".`);
     embed.call(code, true);
+    e.preventDefault();
   });
   document.getElementById('end-btn').addEventListener('click', () => {
     console.info('Ending call.');
