@@ -57,7 +57,6 @@ function handleEmbedReady(e) {
   });
 }
 
-let endTimeout;
 function handleEmbedStateChange(e) {
   console.info(`State set to "${e.state}".`);
   if (e.state === 'ready') {
