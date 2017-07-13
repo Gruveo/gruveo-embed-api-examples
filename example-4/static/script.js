@@ -88,7 +88,5 @@ function handleEmbedRequestToSignApiAuthToken(token) {
 }
 
 function log(msg) {
-  const logsElement = document.getElementById('logs');
-  logsElement.value += `${logsElement.value.length ? '\n' : ''}> ${msg}`;
-  logsElement.scrollTop = logsElement.scrollHeight;
+  console.log(msg);
 }
