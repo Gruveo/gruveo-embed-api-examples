@@ -21,7 +21,7 @@ In the project directory run:
 npm install
 ```
 
-## Running the example
+## Running the Demo
 
 In the project directory run:
 
