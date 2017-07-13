@@ -1,11 +1,13 @@
-# Example 4: Using the JavaScript API Methods and Events
+# Gruveo Embed API: Basic Demo
 
-This example illustrates the usage of the JavaScript API’s methods and events in order to build custom video calling functionality on top of a Gruveo embed. In particular:
+This example show how you can use the Gruveo Embed API to add video and voice calling functionality to your web app. In particular:
 
-* The custom Call button starts a video call on a randomly generated code
-* The End button hangs up a call
-* After each call, call duration is displayed
-* Each call is automatically hung up 10 seconds after being established.
+* The custom Call button makes the Gruveo embed join a call room
+* The End button hangs up the call
+* Custom call controls allow the user to control the embed from within your web app
+* After each call, the call duration is logged.
+
+In the demo, Gruveo is embedded in chromeless mode so it exposes no call controls of its own to the user.
 
 ## Prerequisites
 
@@ -29,8 +31,8 @@ GRUVEO_API_SECRET=<your_api_secret> \
 npm run start-example-4
 ```
 
-You can also provide optional `PORT` environment variable if default value (8443) is not suitable.
+You can also provide the optional `PORT` environment variable if the default value (8443) is not suitable.
 
-Afterwards you can open [https://localhost:8443](https://localhost:8443) in your browser.
+Afterwards open [https://localhost:8443](https://localhost:8443) in your browser.
 
-**Important:** Because the embedded version of Gruveo requires https, we have provided a self-signed certificate which you have to accept in the browser in order to see the example.
+**Important:** Because the embedded version of Gruveo requires HTTPS, we have provided a self-signed certificate which you have to accept in the browser in order to see the demo.
