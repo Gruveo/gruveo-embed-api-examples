@@ -1,6 +1,6 @@
 # Gruveo Embed API: Basic Demo
 
-This example show how you can use the Gruveo Embed API to add video and voice calling functionality to your web app. In particular:
+This example shows how you can use the Gruveo Embed API to add video and voice calling functionality to your web app. In particular:
 
 * The custom Call button makes the Gruveo embed join a call room
 * The End button hangs up the call
