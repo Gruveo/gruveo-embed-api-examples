@@ -2,7 +2,7 @@
 
 Examples:
 
-* [Basic Demo](example-4/README.md)
+* [Basic Demo](basic-demo/README.md)
 
 Documentation:
 
