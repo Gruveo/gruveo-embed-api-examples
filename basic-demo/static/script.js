@@ -15,7 +15,7 @@ function onGruveoEmbedAPIReady() {
       color: '63b2de',
       chromeless: true,
       branding: false,
-    }/* NOTE for old security use this: , securityParams */)
+    })
   });
 
   const form = eleById('form');
@@ -29,6 +29,7 @@ function onGruveoEmbedAPIReady() {
   const cameraSwitchButton = eleById('switchCamera-btn');
 
   // attach event handlers
+
   embed
     .on('ready', () => {
       console.info('Ready.');
@@ -79,10 +80,17 @@ function onGruveoEmbedAPIReady() {
       console.error(`Received error "${error}".`);
     })
     .on('roomLock', ({ locked }) => {
-      console.info(`Received roomLock "${locked}".`, locked);
+      console.info(`Received "roomLock"; locked: ${locked}.`);
       roomLockCheckbox.checked = locked;      
     })
+    .on('streamStateChange', ({ audio, video }) => {
+      console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}.`);
+      audioCheckbox.checked = audio;      
+      videoCheckbox.checked = video;      
+    })
     ;
+
+  // bind event handlers to controls
 
   form.addEventListener('submit', (e) => {
     // Generate a random code and start a video call on that code.
