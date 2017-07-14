@@ -4,26 +4,14 @@ const https = require('https');
 const fs = require('fs');
 const base64 = require('base64-stream');
 
-const clientId = 'demo';
-const secret = 'W62wB9JjW3tFyUMtF5QhRSbk';
+// replace with your secret
+const secret = 'W62wB9JjW3tFyUMtF5QhRSbk'; // secret for "demo" client ID
 
 const basedir = `${__dirname}/..`;
 
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', `${basedir}/views`);
-
-app.get('/', function(req, res) {
-  const generated = Math.floor(Date.now() / 1000);
-  const hmac = crypto.createHmac('sha256', secret);
-  hmac.update(generated.toString());
-
-  res.render('index', {
-    clientId: JSON.stringify(clientId),
-    generated: JSON.stringify(generated),
-    signature: JSON.stringify(hmac.digest('base64'))
-  });
-});
 
 app.post('/signer', function (req, res) {
   req

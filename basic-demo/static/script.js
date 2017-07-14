@@ -7,6 +7,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // eslint-disable-next-line no-unused-vars
 function onGruveoEmbedAPIReady() {
+  // replace with your client ID
+  const clientId = 'demo';
+
   const eleById = document.getElementById.bind(document);
 
   const embed = new Gruveo.Embed('myembed', {
@@ -62,7 +65,7 @@ function onGruveoEmbedAPIReady() {
         .then(res => res.text())
         .then((signature) => {
           console.info(`API Auth token signature is "${signature}".`);
-          embed.authorize(securityParams.clientId, signature);
+          embed.authorize(clientId, signature);
         })
         .catch(err => {
           console.error(`Error signing API Auth token: ${err.message}`);
