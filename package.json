@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start-example-4": "node ./example-4/server"
+    "start-basic-demo": "node ./basic-demo/server"
   },
   "dependencies": {
     "base64-stream": "^0.1.3",

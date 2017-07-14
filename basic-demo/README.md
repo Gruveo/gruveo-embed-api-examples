@@ -26,7 +26,7 @@ npm install
 In the project directory run:
 
 ```
-npm run start-example-4
+npm run start-basic-demo
 ```
 
 You can also provide the optional `PORT` environment variable if the default value (8443) is not suitable.
