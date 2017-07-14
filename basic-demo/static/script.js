@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://local.gruveo.com/embed-api/';
+tag.src = 'https://www.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
