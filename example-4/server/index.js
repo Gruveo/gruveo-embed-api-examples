@@ -4,13 +4,8 @@ const https = require('https');
 const fs = require('fs');
 const base64 = require('base64-stream');
 
-const clientId = process.env.GRUVEO_API_CLIENT_ID;
-const secret = process.env.GRUVEO_API_SECRET;
-
-if (!clientId || !secret) {
-  console.error('Please provide GRUVEO_API_CLIENT_ID and GRUVEO_API_SECRET environment variables.');
-  process.exit(1);
-}
+const clientId = 'demo';
+const secret = 'W62wB9JjW3tFyUMtF5QhRSbk';
 
 const basedir = `${__dirname}/..`;
 
