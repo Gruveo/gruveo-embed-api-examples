@@ -37,4 +37,4 @@ Afterwards open [https://localhost:8443](https://localhost:8443) in your browser
 
 ## Limitations
 
-In this example, the `demo` client ID and its API secret are used. This client ID provides full access to the API functionality, with the exception of all calls being **limited to 5 minutes**. Please <a href="https://about.gruveo.com/developers/api-beta/">get in touch</a> to get your client ID for production use.
+In this example, the `demo` client ID and its API secret are used. This client ID provides full access to the API functionality, with the exception of all calls being **limited to 5 minutes**. Please <a href="https://about.gruveo.com/developers/api-credentials/">get in touch</a> to get your client ID for production use.
