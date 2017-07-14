@@ -7,6 +7,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // eslint-disable-next-line no-unused-vars
 function onGruveoEmbedAPIReady() {
+  const eleById = document.getElementById.bind(document);
+
   const embed = new Gruveo.Embed('myembed', {
     responsive: true,
     embedParams: Object.assign({
@@ -16,18 +18,33 @@ function onGruveoEmbedAPIReady() {
     }/* NOTE for old security use this: , securityParams */)
   });
 
-  const roomLockCheckbox = document.getElementById('roomLock-chk');
+  const form = eleById('form');
+  const codeInput = eleById('code-input');
+  const audioCheckbox = eleById('audio-chk');
+  const videoCheckbox = eleById('video-chk');
+  const roomLockCheckbox = eleById('roomLock-chk');
+  const endButton = eleById('end-btn');
+  const dialer = eleById('dialer');
+  const controls = eleById('controls');
+  const cameraSwitchButton = eleById('switchCamera-btn');
 
   // attach event handlers
   embed
     .on('ready', () => {
       console.info('Ready.');
+      dialer.disabled = false;
     })
     .on('stateChange', ({ state, callDuration }) => {
       console.info(`State set to "${state}".`);
-      if (state === 'ready') {
+      const ready = state === 'ready';
+      if (ready) {
         console.info(`Call duration was ${callDuration} s.`);
+        audioCheckbox.checked = true;
+        videoCheckbox.checked = true;
+        roomLockCheckbox.checked = false;
       }
+      dialer.disabled = !ready;
+      controls.disabled = ready;
     })
     .on('requestToSignApiAuthToken', ({ token }) => {
       console.info(`Signing API Auth token "${token}".`);
@@ -67,22 +84,22 @@ function onGruveoEmbedAPIReady() {
     })
     ;
 
-  document.getElementById('form').addEventListener('submit', (e) => {
+  form.addEventListener('submit', (e) => {
     // Generate a random code and start a video call on that code.
-    const code = document.getElementById('code-input').value || Gruveo.Embed.generateRandomCode();
+    const code = codeInput.value || Gruveo.Embed.generateRandomCode();
     console.info(`Calling code "${code}".`);
     embed.call(code, true);
     e.preventDefault();
   });
-  document.getElementById('end-btn').addEventListener('click', () => {
+  endButton.addEventListener('click', () => {
     console.info('Ending call.');
     embed.end();
   });
-  document.getElementById('audio-chk').addEventListener('change', (e) => {
+  audioCheckbox.addEventListener('change', (e) => {
     console.info('Toggling audio.');
     embed.toggleAudio(e.target.checked);
   });
-  document.getElementById('video-chk').addEventListener('change', (e) => {
+  videoCheckbox.addEventListener('change', (e) => {
     console.info('Toggling video.');
     embed.toggleVideo(e.target.checked);
   });
@@ -90,7 +107,7 @@ function onGruveoEmbedAPIReady() {
     console.info('Toggling room lock.');
     embed.toggleRoomLock(e.target.checked);
   });
-  document.getElementById('switchCamera-btn').addEventListener('click', () => {
+  cameraSwitchButton.addEventListener('click', () => {
     console.info('Switching camera.');
     embed.switchCamera();
   });

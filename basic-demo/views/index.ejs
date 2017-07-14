@@ -44,28 +44,32 @@
             Open the JavaScript console in your browser to see the logs.
           </p>
           <form id="form">
-            <div class="form-group">
-              <label class="control-label" for="code-input">Enter a room name to join:</label>
-              <div class="input-group">
-                <input id="code-input" type="text" class="form-control" size="10" placeholder="Leave empty for random">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-success">Call</button>
-                </span>
+            <fieldset id="dialer" disabled>
+              <div class="form-group">
+                <label class="control-label" for="code-input">Enter a room name to join:</label>
+                <div class="input-group">
+                  <input id="code-input" type="text" class="form-control" size="10" placeholder="Leave empty for random">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-success">Call</button>
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="checkbox-inline">
-                <input id="audio-chk" type="checkbox" /> Microphone on
-              </label>
-              <label class="checkbox-inline">
-                <input id="video-chk" type="checkbox" /> Camera on
-              </label>
-              <label class="checkbox-inline">
-                <input id="roomLock-chk" type="checkbox" /> Room locked
-              </label>
-            </div>
-            <button id="switchCamera-btn" type="button" class="btn btn-default">Switch camera</button>
-            <button id="end-btn" type="button" class="btn btn-danger">End call</button>
+            </fieldset>
+            <fieldset id="controls" disabled>
+              <div class="form-group">
+                <label class="checkbox-inline">
+                  <input id="audio-chk" type="checkbox" checked /> Microphone on
+                </label>
+                <label class="checkbox-inline">
+                  <input id="video-chk" type="checkbox" checked /> Camera on
+                </label>
+                <label class="checkbox-inline">
+                  <input id="roomLock-chk" type="checkbox" /> Room locked
+                </label>
+              </div>
+              <button id="switchCamera-btn" type="button" class="btn btn-default">Switch camera</button>
+              <button id="end-btn" type="button" class="btn btn-danger">End call</button>
+            </fieldset>
           </form>
         </div>
         <div class="col-md-8 col-md-offset-2" style="margin-top: 15px;">
