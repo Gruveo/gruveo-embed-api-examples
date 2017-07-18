@@ -40,14 +40,15 @@
           </p>
           <form id="form">
             <fieldset id="dialer" disabled>
-              <div class="form-group">
+              <div id="code-form-group" class="form-group">
                 <label class="control-label" for="code-input">Enter a room name to join:</label>
                 <div class="input-group">
                   <input id="code-input" type="text" class="form-control" size="10" placeholder="Leave empty for random">
                   <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success">Call</button>
+                    <button id="call-btn" type="submit" class="btn btn-success" disabled>Call</button>
                   </span>
                 </div>
+                <span id="code-help-block" class="help-block" style="display: none">A valid room name or a Gruveo @handle please.</span>
               </div>
             </fieldset>
             <fieldset id="controls" disabled>

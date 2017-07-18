@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://www.gruveo.com/embed-api/';
+tag.src = 'https://local.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -23,6 +23,9 @@ function onGruveoEmbedAPIReady() {
 
   const form = eleById('form');
   const codeInput = eleById('code-input');
+  const codeHelpBlock = eleById('code-help-block');
+  const codeFormGroup = eleById('code-form-group');
+  const callButton = eleById('call-btn');
   const audioCheckbox = eleById('audio-chk');
   const videoCheckbox = eleById('video-chk');
   const roomLockCheckbox = eleById('roomLock-chk');
@@ -84,43 +87,61 @@ function onGruveoEmbedAPIReady() {
     })
     .on('roomLock', ({ locked }) => {
       console.info(`Received "roomLock"; locked: ${locked}.`);
-      roomLockCheckbox.checked = locked;      
+      roomLockCheckbox.checked = locked;
     })
     .on('streamStateChange', ({ audio, video }) => {
       console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}.`);
-      audioCheckbox.checked = audio;      
-      videoCheckbox.checked = video;      
+      audioCheckbox.checked = audio;
+      videoCheckbox.checked = video;
     })
     ;
 
   // bind event handlers to controls
 
   form.addEventListener('submit', (e) => {
-    // Generate a random code and start a video call on that code.
-    const code = codeInput.value || Gruveo.Embed.generateRandomCode();
-    console.info(`Calling code "${code}".`);
-    embed.call(code, true);
+    if (isCodeValid()) {
+      // Generate a random code and start a video call on that code.
+      const code = codeInput.value || Gruveo.Embed.generateRandomCode();
+      console.info(`Calling code "${code}".`);
+      embed.call(code, true);
+    }
     e.preventDefault();
   });
+
   endButton.addEventListener('click', () => {
     console.info('Ending call.');
     embed.end();
   });
+
   audioCheckbox.addEventListener('change', (e) => {
     console.info('Toggling audio.');
     embed.toggleAudio(e.target.checked);
   });
+
   videoCheckbox.addEventListener('change', (e) => {
     console.info('Toggling video.');
     embed.toggleVideo(e.target.checked);
   });
+
   roomLockCheckbox.addEventListener('change', (e) => {
     console.info('Toggling room lock.');
     embed.toggleRoomLock(e.target.checked);
   });
+
   cameraSwitchButton.addEventListener('click', () => {
     console.info('Switching camera.');
     embed.switchCamera();
   });
 
+  codeInput.addEventListener('input', () => {
+    const valid = isCodeValid();
+    const showError = codeInput.value.length && !valid;
+    codeHelpBlock.style.display = showError ? '' : 'none';
+    codeFormGroup.classList.toggle('has-error', showError);
+    callButton.disabled = !valid;
+  });
+
+  function isCodeValid() {
+    return /^@?[a-zA-Z0-9]+$/.test(codeInput.value);
+  }
 }
