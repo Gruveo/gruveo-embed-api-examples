@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://local.gruveo.com/embed-api/';
+tag.src = 'https://www.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -99,7 +99,7 @@ function onGruveoEmbedAPIReady() {
   // bind event handlers to controls
 
   form.addEventListener('submit', (e) => {
-    if (isCodeValid()) {
+    if (isCodeValidOrEmpty()) {
       // Generate a random code and start a video call on that code.
       const code = codeInput.value || Gruveo.Embed.generateRandomCode();
       console.info(`Calling code "${code}".`);
@@ -113,19 +113,19 @@ function onGruveoEmbedAPIReady() {
     embed.end();
   });
 
-  audioCheckbox.addEventListener('change', (e) => {
+  audioCheckbox.addEventListener('change', () => {
     console.info('Toggling audio.');
-    embed.toggleAudio(e.target.checked);
+    embed.toggleAudio(audioCheckbox.checked);
   });
 
-  videoCheckbox.addEventListener('change', (e) => {
+  videoCheckbox.addEventListener('change', () => {
     console.info('Toggling video.');
-    embed.toggleVideo(e.target.checked);
+    embed.toggleVideo(videoCheckbox.checked);
   });
 
-  roomLockCheckbox.addEventListener('change', (e) => {
+  roomLockCheckbox.addEventListener('change', () => {
     console.info('Toggling room lock.');
-    embed.toggleRoomLock(e.target.checked);
+    embed.toggleRoomLock(roomLockCheckbox.checked);
   });
 
   cameraSwitchButton.addEventListener('click', () => {
@@ -134,14 +134,13 @@ function onGruveoEmbedAPIReady() {
   });
 
   codeInput.addEventListener('input', () => {
-    const valid = isCodeValid();
-    const showError = codeInput.value.length && !valid;
-    codeHelpBlock.style.display = showError ? '' : 'none';
-    codeFormGroup.classList.toggle('has-error', showError);
+    const valid = isCodeValidOrEmpty();
+    codeHelpBlock.style.display = !valid ? '' : 'none';
+    codeFormGroup.classList.toggle('has-error', !valid);
     callButton.disabled = !valid;
   });
 
-  function isCodeValid() {
-    return /^@?[a-zA-Z0-9]+$/.test(codeInput.value);
+  function isCodeValidOrEmpty() {
+    return /^@?[a-zA-Z0-9]*$/.test(codeInput.value);
   }
 }
