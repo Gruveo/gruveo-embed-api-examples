@@ -63,7 +63,7 @@ function onGruveoEmbedAPIReady() {
           if (res.status === 200) {
             return res;
           }
-          throw new Error(`Unexpected server respnse status code "${res.status}".`);
+          throw new Error(`Unexpected server response status code "${res.status}".`);
         })
         .then(res => res.text())
         .then((signature) => {
