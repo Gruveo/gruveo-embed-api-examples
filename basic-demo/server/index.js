@@ -35,7 +35,7 @@ const server = ssl
     )
   : http.createServer(app);
 
-const port = parseInt(process.env.PORT) || ssl ? 8443 : 8080;
+const port = parseInt(process.env.PORT) || (ssl ? 8443 : 8080);
 
 server.listen(port, function () {
   console.log(`Server is listening on ${ssl ? 'https' : 'http'}://localhost:${port}.`);
