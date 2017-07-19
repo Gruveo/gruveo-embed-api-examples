@@ -26,7 +26,7 @@ npm install
 In the project directory run:
 
 ```
-npm start
+SSL=true npm start
 ```
 
 You can also provide the optional `PORT` environment variable if the default value (8443) is not suitable.
