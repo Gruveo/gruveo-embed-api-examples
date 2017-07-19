@@ -9,13 +9,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "start-example-4": "node ./example-4/server"
+    "start-basic-demo": "node ./basic-demo/server"
   },
   "dependencies": {
-    "ejs": "^2.5.2",
-    "express": "^4.14.0"
+    "base64-stream": "^0.1.3",
+    "express": "^4.15.3"
   },
   "devDependencies": {
-    "eslint": "^3.7.1"
+    "eslint": "^4.1.1"
   }
 }

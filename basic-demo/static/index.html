@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gruveo Embed API: Basic Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="https://github.com/Gruveo/gruveo-embed-api-examples">
+            <img
+              style="position: absolute; top: 0; right: 0; border: 0;"
+              src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
+              alt="Fork me on GitHub"
+              data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+            >
+          </a>
+
+          <a class="navbar-brand" href=".">
+            Gruveo Embed API: Basic Demo
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <p>
+            This simple demo shows how you can add a Gruveo embed to your web application and interact with it using the provided
+            <a href="https://about.gruveo.com/developers/">JavaScript API</a>.
+            To establish a call, open this page in two or more tabs and join the same room in all.
+            Open the JavaScript console in your browser to see the logs.
+          </p>
+          <form id="form">
+            <fieldset id="dialer" disabled>
+              <div id="code-form-group" class="form-group">
+                <label class="control-label" for="code-input">Enter a room name to join:</label>
+                <div class="input-group">
+                  <input id="code-input" type="text" class="form-control" size="10" placeholder="Leave empty for random">
+                  <span class="input-group-btn">
+                    <button id="call-btn" type="submit" class="btn btn-success">Call</button>
+                  </span>
+                </div>
+                <span id="code-help-block" class="help-block" style="display: none">A valid room name or a Gruveo @handle please.</span>
+              </div>
+            </fieldset>
+            <fieldset id="controls" disabled>
+              <div class="form-group">
+                <label class="checkbox-inline">
+                  <input id="audio-chk" type="checkbox" checked /> Microphone on
+                </label>
+                <label class="checkbox-inline">
+                  <input id="video-chk" type="checkbox" checked /> Camera on
+                </label>
+                <label class="checkbox-inline">
+                  <input id="roomLock-chk" type="checkbox" /> Room locked
+                </label>
+              </div>
+              <button id="switchCamera-btn" type="button" class="btn btn-default">Switch camera</button>
+              <button id="end-btn" type="button" class="btn btn-danger">End call</button>
+            </fieldset>
+          </form>
+        </div>
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 15px;">
+          <div id="myembed"></div>
+          <script src="script.js"></script>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2017 Gruveo</p>
+      </footer>
+    </div>
+
+  </body>
+</html>
