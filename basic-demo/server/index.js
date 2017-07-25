@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.set('views', `${basedir}/views`);
 
 const corsOptions = {
-  origin: /\.gruveo\.com$/,
+  origin: /\.gruveo\.com$/, // specify your domain
   methods: ['POST'],
 };
 
