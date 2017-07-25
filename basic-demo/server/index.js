@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const crypto = require('crypto');
 const https = require('https');
 const http = require('http');
@@ -14,11 +15,26 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', `${basedir}/views`);
 
-app.post('/signer', function (req, res) {
-  req
-    .pipe(crypto.createHmac('sha256', secret))
-    .pipe(base64.encode())
-    .pipe(res.set('Content-Type', 'text/plain'));
+const corsOptions = {
+  origin: /\.gruveo\.com$/,
+  methods: ['POST'],
+};
+
+app.options('/signer', cors(corsOptions));
+
+app.all('/signer', cors(corsOptions), function (req, res) {
+  if (req.method !== 'POST') {
+    res.send(405).set('Allow', 'POST, OPTIONS').end();
+  } else if (!req.is('text/plain')) {
+    res.send(415).end();
+  } else if (!req.accepts('text/plain')) {
+    res.send(406).end();
+  } else {
+    req
+      .pipe(crypto.createHmac('sha256', secret))
+      .pipe(base64.encode())
+      .pipe(res.set('Content-Type', 'text/plain'));
+  }
 });
 
 app.use(express.static(`${basedir}/static`));
