@@ -29,6 +29,7 @@ function onGruveoEmbedAPIReady() {
   const audioCheckbox = eleById('audio-chk');
   const videoCheckbox = eleById('video-chk');
   const roomLockCheckbox = eleById('roomLock-chk');
+  const recordCallCheckbox = eleById('recordCall-chk');
   const endButton = eleById('end-btn');
   const dialer = eleById('dialer');
   const controls = eleById('controls');
@@ -49,7 +50,9 @@ function onGruveoEmbedAPIReady() {
         audioCheckbox.checked = true;
         videoCheckbox.checked = true;
         roomLockCheckbox.checked = false;
+        recordCallCheckbox.checked = false;
       }
+      recordCallCheckbox.disabled = state !== 'call';
       dialer.disabled = !ready;
       controls.disabled = ready;
     })
@@ -89,6 +92,11 @@ function onGruveoEmbedAPIReady() {
       console.info(`Received "roomLock"; locked: ${locked}.`);
       roomLockCheckbox.checked = locked;
     })
+    .on('recording', ({ who }) => {
+      console.info(who ? `Call recording started; actor: ${who}.` : 'Call recording stopper.');
+      recordCallCheckbox.checked = who === 'we' || who === 'both';
+      recordCallCheckbox.disabled = false;
+    })
     .on('streamStateChange', ({ audio, video }) => {
       console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}.`);
       audioCheckbox.checked = audio;
@@ -126,6 +134,16 @@ function onGruveoEmbedAPIReady() {
   roomLockCheckbox.addEventListener('change', () => {
     console.info('Toggling room lock.');
     embed.toggleRoomLock(roomLockCheckbox.checked);
+  });
+
+  recordCallCheckbox.addEventListener('change', () => {
+    console.info('Toggling call recording.');
+
+    embed.toggleRecording(recordCallCheckbox.checked ? {
+      serviceOptions: {"accessKeyId":"AKIAIRBOZQB4AUQXOR2Q","secretAccessKey":"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","params":{"Bucket":"gruveo-martin"},"url":"https://s3.amazonaws.com/gruveo-martin"},
+      uploadParams: { Key: 'rec/rec-{code}-{callRecordId}.{extension}' },
+    } : false);
+    recordCallCheckbox.disabled = true;
   });
 
   cameraSwitchButton.addEventListener('click', () => {
