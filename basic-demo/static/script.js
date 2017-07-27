@@ -139,10 +139,7 @@ function onGruveoEmbedAPIReady() {
   recordCallCheckbox.addEventListener('change', () => {
     console.info('Toggling call recording.');
 
-    embed.toggleRecording(recordCallCheckbox.checked ? {
-      serviceOptions: {"accessKeyId":"AKIAIRBOZQB4AUQXOR2Q","secretAccessKey":"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","params":{"Bucket":"gruveo-martin"},"url":"https://s3.amazonaws.com/gruveo-martin"},
-      uploadParams: { Key: 'rec/rec-{code}-{callRecordId}.{extension}' },
-    } : false);
+    embed.toggleRecording(recordCallCheckbox.checked);
     recordCallCheckbox.disabled = true;
   });
 
