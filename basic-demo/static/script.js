@@ -93,7 +93,7 @@ function onGruveoEmbedAPIReady() {
       roomLockCheckbox.checked = locked;
     })
     .on('recording', ({ who }) => {
-      console.info(who ? `Call recording started; actor: ${who}.` : 'Call recording stopper.');
+      console.info(who ? `Call recording started; actor: ${who}.` : 'Call recording stopped.');
       recordCallCheckbox.checked = who === 'we' || who === 'both';
       recordCallCheckbox.disabled = false;
     })
