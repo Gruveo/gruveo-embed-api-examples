@@ -88,8 +88,8 @@ function onGruveoEmbedAPIReady() {
     .on('error', ({ error }) => {
       console.error(`Received error "${error}".`);
     })
-    .on('roomLock', ({ locked }) => {
-      console.info(`Received "roomLock"; locked: ${locked}.`);
+    .on('roomLockStateChange', ({ locked }) => {
+      console.info(locked ? 'Room is locked.' : 'Room is unlocked.');
       roomLockCheckbox.checked = locked;
     })
     .on('recordingStateChange', ({ us, them }) => {
