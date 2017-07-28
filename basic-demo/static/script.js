@@ -96,7 +96,7 @@ function onGruveoEmbedAPIReady() {
       console.info(
         us || them
           ? `Call is recorded by ${us ? 'us' : ''}${us && them ? ' and ': ''}${them ? 'them' : ''}.`
-          : 'Call is not recoeded.'
+          : 'Call is not recorded.'
       );
       recordCallCheckbox.checked = us;
       recordCallCheckbox.disabled = false;
