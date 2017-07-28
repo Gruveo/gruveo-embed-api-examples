@@ -92,9 +92,13 @@ function onGruveoEmbedAPIReady() {
       console.info(`Received "roomLock"; locked: ${locked}.`);
       roomLockCheckbox.checked = locked;
     })
-    .on('recording', ({ who }) => {
-      console.info(who ? `Call recording started; actor: ${who}.` : 'Call recording stopped.');
-      recordCallCheckbox.checked = who === 'we' || who === 'both';
+    .on('recordingStateChange', ({ us, them }) => {
+      console.info(
+        us || them
+          ? `Call is recorded by ${us ? 'us' : ''}${us && them ? ' and ': ''}${them ? 'them' : ''}.`
+          : 'Call is not recoeded.'
+      );
+      recordCallCheckbox.checked = us;
       recordCallCheckbox.disabled = false;
     })
     .on('streamStateChange', ({ audio, video }) => {
