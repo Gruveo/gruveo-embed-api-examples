@@ -7,18 +7,16 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // eslint-disable-next-line no-unused-vars
 function onGruveoEmbedAPIReady() {
-  // replace with your client ID
-  const clientId = 'demo';
-
   const eleById = document.getElementById.bind(document);
 
   const embed = new Gruveo.Embed('myembed', {
     responsive: true,
-    embedParams: Object.assign({
+    embedParams: {
       color: '63b2de',
       chromeless: true,
       branding: false,
-    })
+      clientid: 'demo' // replace with your client ID
+    }
   });
 
   const form = eleById('form');
@@ -29,6 +27,7 @@ function onGruveoEmbedAPIReady() {
   const audioCheckbox = eleById('audio-chk');
   const videoCheckbox = eleById('video-chk');
   const roomLockCheckbox = eleById('roomLock-chk');
+  const recordCallCheckbox = eleById('recordCall-chk');
   const endButton = eleById('end-btn');
   const dialer = eleById('dialer');
   const controls = eleById('controls');
@@ -49,7 +48,9 @@ function onGruveoEmbedAPIReady() {
         audioCheckbox.checked = true;
         videoCheckbox.checked = true;
         roomLockCheckbox.checked = false;
+        recordCallCheckbox.checked = false;
       }
+      recordCallCheckbox.disabled = state !== 'call';
       dialer.disabled = !ready;
       controls.disabled = ready;
     })
@@ -68,7 +69,7 @@ function onGruveoEmbedAPIReady() {
         .then(res => res.text())
         .then((signature) => {
           console.info(`API Auth token signature is "${signature}".`);
-          embed.authorize(clientId, signature);
+          embed.authorize(signature);
         })
         .catch(err => {
           console.error(`Error signing API Auth token: ${err.message}`);
@@ -85,9 +86,18 @@ function onGruveoEmbedAPIReady() {
     .on('error', ({ error }) => {
       console.error(`Received error "${error}".`);
     })
-    .on('roomLock', ({ locked }) => {
-      console.info(`Received "roomLock"; locked: ${locked}.`);
+    .on('roomLockStateChange', ({ locked }) => {
+      console.info(locked ? 'Room is locked.' : 'Room is unlocked.');
       roomLockCheckbox.checked = locked;
+    })
+    .on('recordingStateChange', ({ us, them }) => {
+      console.info(
+        us || them
+          ? `Call is recorded by ${us ? 'us' : ''}${us && them ? ' and ': ''}${them ? 'them' : ''}.`
+          : 'Call is not recorded.'
+      );
+      recordCallCheckbox.checked = us;
+      recordCallCheckbox.disabled = false;
     })
     .on('streamStateChange', ({ audio, video }) => {
       console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}.`);
@@ -126,6 +136,13 @@ function onGruveoEmbedAPIReady() {
   roomLockCheckbox.addEventListener('change', () => {
     console.info('Toggling room lock.');
     embed.toggleRoomLock(roomLockCheckbox.checked);
+  });
+
+  recordCallCheckbox.addEventListener('change', () => {
+    console.info('Toggling call recording.');
+
+    embed.toggleRecording(recordCallCheckbox.checked);
+    recordCallCheckbox.disabled = true;
   });
 
   cameraSwitchButton.addEventListener('click', () => {
