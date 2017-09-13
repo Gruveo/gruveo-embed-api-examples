@@ -104,6 +104,9 @@ function onGruveoEmbedAPIReady() {
       audioCheckbox.checked = audio;
       videoCheckbox.checked = video;
     })
+    .on('recordingId', ({ id }) => {
+      console.info(`ID of the recording: ${id}`);
+    })
     ;
 
   // bind event handlers to controls
