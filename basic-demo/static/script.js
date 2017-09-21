@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://www.gruveo.com/embed-api/';
+tag.src = 'https://local.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -104,7 +104,7 @@ function onGruveoEmbedAPIReady() {
       audioCheckbox.checked = audio;
       videoCheckbox.checked = video;
     })
-    .on('callRecordFilename', ({ filename }) => {
+    .on('recordingFilename', ({ filename }) => {
       console.info(`Call record filename: ${filename}`);
     })
     ;
