@@ -39,7 +39,7 @@ app.all('/signer', cors(corsOptions), function (req, res) {
 
 app.use(express.static(`${basedir}/static`));
 
-const ssl = ['1', 'true', 'yes', 'on', 'enable'].includes(process.env.SSL);
+const ssl = ['1', 'true', 'yes', 'on', 'enable'].indexOf(process.env.SSL) !== -1;
 
 const server = ssl
   ? https.createServer(
