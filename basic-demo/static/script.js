@@ -13,8 +13,8 @@ function onGruveoEmbedAPIReady() {
     responsive: true,
     embedParams: {
       color: '63b2de',
-      chromeless: true,
-      branding: false,
+      chromeless: 1,
+      branding: 0,
       clientid: 'demo' // replace with your client ID
     }
   });
