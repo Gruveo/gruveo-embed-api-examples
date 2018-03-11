@@ -28,6 +28,7 @@ function onGruveoEmbedAPIReady() {
   const videoCheckbox = eleById('video-chk');
   const roomLockCheckbox = eleById('roomLock-chk');
   const recordCallCheckbox = eleById('recordCall-chk');
+  const fullscreenCheckbox = eleById('fullscreen-chk');
   const endButton = eleById('end-btn');
   const dialer = eleById('dialer');
   const controls = eleById('controls');
@@ -53,6 +54,7 @@ function onGruveoEmbedAPIReady() {
       recordCallCheckbox.disabled = state !== 'call';
       dialer.disabled = !ready;
       controls.disabled = ready;
+      fullscreenCheckbox.disabled = ready;
     })
     .on('requestToSignApiAuthToken', ({ token }) => {
       console.info(`Signing API Auth token "${token}".`);
@@ -107,6 +109,14 @@ function onGruveoEmbedAPIReady() {
     .on('recordingFilename', ({ filename }) => {
       console.info(`Call record filename: ${filename}`);
     })
+    .on('fullscreenStateChange', ({ fullscreen }) => {
+      console.info(fullscreen ? 'Entered fullscreen mode.' : 'Exited fullscreen mode.');
+      fullscreenCheckbox.checked = fullscreen;
+    })
+    .on('fullscreenError', () => {
+      console.info('Error toggling fullscreen mode.');
+      fullscreenCheckbox.checked = false;
+    })
     ;
 
   // bind event handlers to controls
@@ -146,6 +156,11 @@ function onGruveoEmbedAPIReady() {
 
     embed.toggleRecording(recordCallCheckbox.checked);
     recordCallCheckbox.disabled = true;
+  });
+
+  fullscreenCheckbox.addEventListener('change', () => {
+    console.info('Toggling fullscreen mode.');
+    embed.toggleFullscreen(fullscreenCheckbox.checked);
   });
 
   cameraSwitchButton.addEventListener('click', () => {
