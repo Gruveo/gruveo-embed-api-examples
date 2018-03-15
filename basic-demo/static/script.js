@@ -87,6 +87,9 @@ function onGruveoEmbedAPIReady() {
     })
     .on('error', ({ error }) => {
       console.error(`Received error "${error}".`);
+      if (error === 'ERROR_FULLSCREEN') {
+        fullscreenCheckbox.checked = false;
+      }
     })
     .on('roomLockStateChange', ({ locked }) => {
       console.info(locked ? 'Room is locked.' : 'Room is unlocked.');
@@ -112,10 +115,6 @@ function onGruveoEmbedAPIReady() {
     .on('fullscreenStateChange', ({ fullscreen }) => {
       console.info(fullscreen ? 'Entered fullscreen mode.' : 'Exited fullscreen mode.');
       fullscreenCheckbox.checked = fullscreen;
-    })
-    .on('fullscreenError', () => {
-      console.info('Error toggling fullscreen mode.');
-      fullscreenCheckbox.checked = false;
     })
     ;
 
