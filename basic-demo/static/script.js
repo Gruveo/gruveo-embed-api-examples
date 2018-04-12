@@ -36,18 +36,11 @@ function onGruveoEmbedAPIReady() {
 
   // attach event handlers
 
-  if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-    screenCheckbox.disabled = false;
-  }
-
   embed
     .on('ready', () => {
       console.info('Ready.');
       dialer.disabled = false;
-
-      if (window.chrome) {
-        embed.getChromeScreenSharingExtensionStatus();
-      }
+      embed.getScreenSharingCapability();
     })
     .on('stateChange', ({ state, callDuration }) => {
       console.info(`State set to "${state}".`);
@@ -119,9 +112,9 @@ function onGruveoEmbedAPIReady() {
     .on('recordingFilename', ({ filename }) => {
       console.info(`Call record filename: ${filename}`);
     })
-    .on('chromeScreenSharingExtensionStatus', ({ status }) => {
-      console.info(`Chrome screen sharing extension status: ${status}`);
-      screenCheckbox.disabled = status !== 'installed-enabled';
+    .on('screenSharingCapability', ({ capability }) => {
+      console.info(`Screen sharing capability: ${capability}`);
+      screenCheckbox.disabled = capability !== 'enabled';
     })
     ;
 
