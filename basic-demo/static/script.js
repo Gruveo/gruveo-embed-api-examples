@@ -113,6 +113,8 @@ function onGruveoEmbedAPIReady() {
       console.info(`Call record filename: ${filename}`);
     })
     .on('screenSharingCapability', ({ capability }) => {
+      // capability can be one of: enabled, unsupported,
+      //   chrome-extension-not-installed, chrome-extension-installed-disabled, chrome-extension-pending
       console.info(`Screen sharing capability: ${capability}`);
       screenCheckbox.disabled = capability !== 'enabled';
     })
