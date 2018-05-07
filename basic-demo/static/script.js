@@ -40,7 +40,7 @@ function onGruveoEmbedAPIReady() {
     .on('ready', () => {
       console.info('Ready.');
       dialer.disabled = false;
-      embed.getScreenSharingCapability();
+      embed.getScreenSharingAvailability();
     })
     .on('stateChange', ({ state, callDuration }) => {
       console.info(`State set to "${state}".`);
@@ -112,11 +112,11 @@ function onGruveoEmbedAPIReady() {
     .on('recordingFilename', ({ filename }) => {
       console.info(`Call record filename: ${filename}`);
     })
-    .on('screenSharingCapability', ({ capability }) => {
-      // capability can be one of: enabled, unsupported,
+    .on('screenSharingAvailability', ({ availability }) => {
+      // availability can be one of: available, unsupported,
       //   chrome-extension-not-installed, chrome-extension-installed-disabled, chrome-extension-pending
-      console.info(`Screen sharing capability: ${capability}`);
-      screenCheckbox.disabled = capability !== 'enabled';
+      console.info(`Screen sharing availability: ${availability}`);
+      screenCheckbox.disabled = availability !== 'available';
     })
     ;
 
