@@ -113,8 +113,6 @@ function onGruveoEmbedAPIReady() {
       console.info(`Call record filename: ${filename}`);
     })
     .on('screenSharingAvailability', ({ availability }) => {
-      // availability can be one of: available, unsupported,
-      //   chrome-extension-not-installed, chrome-extension-installed-disabled, chrome-extension-pending
       console.info(`Screen sharing availability: ${availability}`);
       screenCheckbox.disabled = availability !== 'available';
     })
