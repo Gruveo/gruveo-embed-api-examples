@@ -121,7 +121,11 @@ function onGruveoEmbedAPIReady() {
       console.info(`Screen sharing availability: ${availability}`);
       screenCheckbox.disabled = availability !== 'available';
     })
-    ;
+    .on('fullscreenStateChange', ({ fullscreen }) => {
+      console.info(`Fullscreen state changed: ${fullscreen}`);
+      fullscreenCheckbox.checked = fullscreen;
+    })
+  ;
 
   // bind event handlers to controls
 
