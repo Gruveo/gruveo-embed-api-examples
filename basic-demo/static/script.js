@@ -26,6 +26,7 @@ function onGruveoEmbedAPIReady() {
   const callButton = eleById('call-btn');
   const audioCheckbox = eleById('audio-chk');
   const videoCheckbox = eleById('video-chk');
+  const screenCheckbox = eleById('screen-chk');
   const roomLockCheckbox = eleById('roomLock-chk');
   const recordCallCheckbox = eleById('recordCall-chk');
   const fullscreenCheckbox = eleById('fullscreen-chk');
@@ -40,6 +41,7 @@ function onGruveoEmbedAPIReady() {
     .on('ready', () => {
       console.info('Ready.');
       dialer.disabled = false;
+      embed.getScreenSharingAvailability();
     })
     .on('stateChange', ({ state, callDuration }) => {
       console.info(`State set to "${state}".`);
@@ -48,6 +50,7 @@ function onGruveoEmbedAPIReady() {
         console.info(`Call duration was ${callDuration} s.`);
         audioCheckbox.checked = true;
         videoCheckbox.checked = true;
+        screenCheckbox.checked = false;
         roomLockCheckbox.checked = false;
         recordCallCheckbox.checked = false;
       }
@@ -104,17 +107,19 @@ function onGruveoEmbedAPIReady() {
       recordCallCheckbox.checked = us;
       recordCallCheckbox.disabled = false;
     })
-    .on('streamStateChange', ({ audio, video }) => {
-      console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}.`);
+    .on('streamStateChange', ({ audio, video, videoSource }) => {
+      console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}, videoSource: ${videoSource}.`);
       audioCheckbox.checked = audio;
       videoCheckbox.checked = video;
+      videoCheckbox.disabled = videoSource === 'screen';
+      screenCheckbox.checked = videoSource === 'screen';
     })
     .on('recordingFilename', ({ filename }) => {
       console.info(`Call record filename: ${filename}`);
     })
-    .on('fullscreenStateChange', ({ fullscreen }) => {
-      console.info(fullscreen ? 'Entered fullscreen mode.' : 'Exited fullscreen mode.');
-      fullscreenCheckbox.checked = fullscreen;
+    .on('screenSharingAvailability', ({ availability }) => {
+      console.info(`Screen sharing availability: ${availability}`);
+      screenCheckbox.disabled = availability !== 'available';
     })
     ;
 
@@ -138,11 +143,19 @@ function onGruveoEmbedAPIReady() {
   audioCheckbox.addEventListener('change', () => {
     console.info('Toggling audio.');
     embed.toggleAudio(audioCheckbox.checked);
+    audioCheckbox.checked = !audioCheckbox.checked; // change state in streamStateChange handler
   });
 
   videoCheckbox.addEventListener('change', () => {
     console.info('Toggling video.');
-    embed.toggleVideo(videoCheckbox.checked);
+    embed.toggleVideo(videoCheckbox.checked ? 'camera' : false);
+    videoCheckbox.checked = !videoCheckbox.checked; // change state in streamStateChange handler
+  });
+
+  screenCheckbox.addEventListener('change', () => {
+    console.info('Toggling screen sharing.');
+    embed.toggleVideo(screenCheckbox.checked ? 'screen' : videoCheckbox.checked ? 'camera' : false);
+    screenCheckbox.checked = !screenCheckbox.checked; // change state in streamStateChange handler
   });
 
   roomLockCheckbox.addEventListener('change', () => {
