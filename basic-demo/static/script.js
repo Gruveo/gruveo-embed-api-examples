@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://www.gruveo.com/embed-api/';
+tag.src = 'https://local.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -57,7 +57,7 @@ function onGruveoEmbedAPIReady() {
       recordCallCheckbox.disabled = state !== 'call';
       dialer.disabled = !ready;
       controls.disabled = ready;
-      fullscreenCheckbox.disabled = ready;
+      fullscreenCheckbox.disabled = state !== 'call' && state !== 'call-setup';
     })
     .on('requestToSignApiAuthToken', ({ token }) => {
       console.info(`Signing API Auth token "${token}".`);
