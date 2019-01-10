@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
-const base64 = require('base64-stream');
+const { Base64Encode } = require('base64-stream');
 
 // replace with your secret
 const secret = 'W62wB9JjW3tFyUMtF5QhRSbk'; // secret for "demo" client ID
@@ -32,7 +32,7 @@ app.all('/signer', cors(corsOptions), function (req, res) {
   } else {
     req
       .pipe(crypto.createHmac('sha256', secret))
-      .pipe(base64.encode())
+      .pipe(new Base64Encode())
       .pipe(res.set('Content-Type', 'text/plain'));
   }
 });
