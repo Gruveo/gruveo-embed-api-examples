@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 
 const tag = document.createElement('script');
-tag.src = 'https://www.gruveo.com/embed-api/';
+tag.src = decodeURIComponent((/(?:\?|.*&)gruveo-api-url=([^&]*)/.exec(window.location.search) || [0, ''])[1])
+  || 'https://www.gruveo.com/embed-api/';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
