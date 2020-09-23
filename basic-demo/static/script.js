@@ -193,6 +193,6 @@ function onGruveoEmbedAPIReady() {
   });
 
   function isCodeValidOrEmpty() {
-    return /^@?[a-zA-Z0-9]*$/.test(codeInput.value);
+    return codeInput.value === '' || /^@?[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/.test(codeInput.value);
   }
 }
