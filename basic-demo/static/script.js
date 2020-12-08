@@ -35,6 +35,7 @@ function onGruveoEmbedAPIReady() {
   const dialer = eleById('dialer');
   const controls = eleById('controls');
   const cameraSwitchButton = eleById('switchCamera-btn');
+  const snapshotButton = eleById('snapshot-btn');
 
   // attach event handlers
 
@@ -126,6 +127,9 @@ function onGruveoEmbedAPIReady() {
       console.info(`Fullscreen state changed: ${fullscreen}`);
       fullscreenCheckbox.checked = fullscreen;
     })
+    .on('snapshot', (data) => {
+      console.info('Received snapshot:', data);
+    })
   ;
 
   // bind event handlers to controls
@@ -183,6 +187,11 @@ function onGruveoEmbedAPIReady() {
   cameraSwitchButton.addEventListener('click', () => {
     console.info('Switching camera.');
     embed.switchCamera();
+  });
+
+  snapshotButton.addEventListener('click', () => {
+    console.info('Snapshot.');
+    embed.getSnapshot(true);
   });
 
   codeInput.addEventListener('input', () => {
