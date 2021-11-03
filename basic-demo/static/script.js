@@ -112,7 +112,9 @@ function onGruveoEmbedAPIReady() {
     .on('streamStateChange', ({ audio, video, videoSource }) => {
       console.info(`Received "streamStateChange"; audio: ${audio}, video: ${video}, videoSource: ${videoSource}.`);
       audioCheckbox.checked = audio;
-      videoCheckbox.checked = video;
+      if (videoSource !== 'screen') {
+        videoCheckbox.checked = video;
+      }
       videoCheckbox.disabled = videoSource === 'screen';
       screenCheckbox.checked = videoSource === 'screen';
     })
