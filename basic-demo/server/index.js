@@ -24,11 +24,11 @@ app.options('/signer', cors(corsOptions));
 
 app.all('/signer', cors(corsOptions), function (req, res) {
   if (req.method !== 'POST') {
-    res.set('Allow', 'POST, OPTIONS').send(405).end();
+    res.set('Allow', 'POST, OPTIONS').sendStatus(405).end();
   } else if (!req.is('text/plain')) {
-    res.send(415).end();
+    res.sendStatus(415).end();
   } else if (!req.accepts('text/plain')) {
-    res.send(406).end();
+    res.sendStatus(406).end();
   } else {
     req
       .pipe(crypto.createHmac('sha256', secret))
