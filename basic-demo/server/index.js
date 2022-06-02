@@ -24,7 +24,7 @@ app.options('/signer', cors(corsOptions));
 
 app.all('/signer', cors(corsOptions), function (req, res) {
   if (req.method !== 'POST') {
-    res.send(405).set('Allow', 'POST, OPTIONS').end();
+    res.set('Allow', 'POST, OPTIONS').send(405).end();
   } else if (!req.is('text/plain')) {
     res.send(415).end();
   } else if (!req.accepts('text/plain')) {
