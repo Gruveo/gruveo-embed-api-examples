@@ -1,7 +1,7 @@
 {
   "name": "gruveo-embed-api-examples",
   "engines": {
-    "node": ">=12.0"
+    "node": ">=24.0"
   },
   "version": "1.0.0",
   "description": "Gruveo Embed API Examples",

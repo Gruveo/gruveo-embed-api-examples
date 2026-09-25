@@ -11,7 +11,7 @@ In the demo, Gruveo is embedded in chromeless mode so it exposes no call control
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) 4 or above
+* [Node.js](https://nodejs.org/) 24 or above
 
 ## Installation
 
